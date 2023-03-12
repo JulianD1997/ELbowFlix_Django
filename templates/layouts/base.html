@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElbowFlix|{% block 'title' %}{% endblock %}</title>
+    {% comment %} Cargar hojas de estilo {% endcomment %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    {% block 'styles' %}{% endblock %}
+</head>
+<body class='body'>
+    <header class='header'>
+        {% include 'layouts/partials/nav.html' %}
+    </header>
+    <main class='main'>
+        {% block 'content' %}
+        {% endblock %}
+    </main>
+    <footer>
+        {% include 'layouts/partials/footer.html' %}
+    </footer>
+    
+    {% block 'scripts' %}
+    {% endblock %}
+</body>
+</html>
