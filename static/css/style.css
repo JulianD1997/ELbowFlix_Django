@@ -1,110 +1,265 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
 /* global styles*/
 :root {
-    --primary-color: rgb(0, 70, 128);
-    --secondary-color: rgb(39, 45, 48);
-    --tertiary-color: rgb(128, 128, 128);
-    --accent-color: rgb(220, 0, 78);
-    --text-color: rgb(255, 255, 255);
-    --font-title: 'Playfair Display', serif;
-    --font-primary: 'Roboto', sans-serif;
-    --font-secondary: 'Lato', sans-serif;
+  --primary-color: rgb(0, 70, 128);
+  --nav_menu-color: rgb(0, 115, 209);
+  --secondary-color: rgb(39, 45, 48);
+  --tertiary-color: rgb(128, 128, 128);
+  --accent-color: rgb(220, 0, 78);
+  --black-color: rgb(0, 0, 0);
+  --text-color: rgb(255, 255, 255);
+  --hover-text-color: rgb(205, 205, 205);
+  --font-title: 'Roboto', sans-serif;
+  --font-primary: 'Lato', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: var(--secondary-color);
-    font-size: 1.5rem;
-    color: var(--text-color);
-    font-family: var(--font-secondary);
+  background-color: var(--secondary-color);
+  font-size: 1.5rem;
+  color: var(--text-color);
+  font-family: var(--font-primary);
 }
 
-h1,h2,h3,h4,h5,h6{
-    font-size: 2rem;
-    font-size: var(--font-title);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 2rem;
+  font-family: var(--font-title);
 }
 
-p{
-    font-size: var(--font-primary);
+a {
+  text-decoration: none;
 }
+
+ul {
+  list-style-type: none;
+}
+
 /* end global style */
 
 /* Styles nav */
 .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background-color: var(--secondary-color);
-    color: var(--text-color);
+  position: fixed;
+  padding: 0.5rem 1rem;
+  z-index: 100;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-color);
+}
+
+.nav__logo {
+  color: var(--text-color);
+  font-size: 2rem;
+  font-weight: bold;
+  text-decoration: none;
+  animation: slide 2s infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
   }
-  
-  .nav__logo {
-    font-family: var(--font-title);
-    font-size: 2rem;
-    text-decoration: none;
-    color: var(--text-color);
+
+  50% {
+    transform: translateX(10px);
   }
-  
-  .nav__menu {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+
+  100% {
+    transform: translateX(0);
   }
-  
-  .nav__item {
-    margin-left: 2rem;
+}
+
+.nav__menu {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 100%;
+  background-color: var(--nav_menu-color);
+  transition: left 0.5s;
+}
+
+.nav__item {
+  margin-bottom: 1rem;
+}
+
+.nav__link {
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease-out, trabsform 0.3s ease-out;
+}
+
+.nav__link>span {
+  transition: text-decoration 0.3s ease-out;
+}
+
+.nav__link:hover {
+  color: var(--hover-text-color);
+  transform: scale(1.2);
+}
+
+.nav__link:hover>span {
+  text-decoration: underline;
+}
+
+.burger {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 40px;
+  height: 30px;
+  margin-right: 1rem;
+}
+
+.bar {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 5px;
+  background-color: var(--text-color);
+  box-shadow: -2px -2px 5px var(--black-color);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.burger.active .bar:nth-child(1) {
+  animation: top_active ease .7s forwards;
+}
+
+.burger.no_active .bar:nth-child(1) {
+  animation: top_no_active ease .7s forwards;
+}
+
+.burger.active .bar:nth-child(2) {
+  animation: center_active ease .7s forwards;
+}
+
+.burger.no_active .bar:nth-child(2) {
+  animation: center_no_active .7s forwards;
+}
+
+.burger.active .bar:nth-child(3) {
+  animation: down_active ease .7s forwards;
+}
+
+.burger.no_active .bar:nth-child(3) {
+  animation: down_no_active ease .7s forwards;
+}
+
+@keyframes top_active {
+  0% {
+    top: 0;
+    transform: rotate(0);
   }
-  
-  .nav__link {
-    display: flex;
-    align-items: center;
-    font-family: var(--font-primary);
-    font-size: 1.2rem;
-    text-decoration: none;
-    color: var(--text-color);
+
+  50% {
+    top: calc((30px - 15px)/2 + 5px);
+    transform: rotate(0);
   }
-  
-  .nav__link i {
-    margin-right: 0.5rem;
+
+  100% {
+    top: calc((30px - 15px)/2 + 5px);
+    transform: rotate(45deg);
   }
-  
-  .burger {
-    display: none;
+}
+
+@keyframes top_no_active {
+  0% {
+    top: calc((30px - 15px)/2 + 5px);
+    transform: rotate(20deg);
   }
-  
-  @media screen and (max-width: 768px) {
-    .nav__menu {
-      display: none;
-      position: absolute;
-      top: 5rem;
-      left: 0;
-      right: 0;
-      background-color: var(--secondary-color);
-      padding: 1rem;
-    }
-  
-    .nav__item {
-      margin: 1rem 0;
-    }
-  
-    .burger {
-      display: block;
-      cursor: pointer;
-    }
+
+  50% {
+    top: calc((30px - 15px)/2 + 5px);
+    transform: rotate(0deg)
   }
-  
-  @media screen and (max-width: 480px) {
-    .nav__logo {
-      font-size: 1.5rem;
-    }
-  
-    .nav__link {
-      font-size: 1rem;
-    }
+
+  100% {
+    top: 0px;
+    transform: rotate(0deg);
   }
-  
-  
-  /* end nav  */
+}
+
+@keyframes down_active {
+  0% {
+    top: 0;
+    transform: rotate(0);
+  }
+
+  50% {
+    top: calc(-1*((30px - 15px)/2 + 5px));
+    transform: rotate(0);
+  }
+
+  100% {
+    top: calc(-1*((30px - 15px)/2 + 5px));
+    transform: rotate(-45deg);
+  }
+}
+
+@keyframes down_no_active {
+  0% {
+    top: calc(-1*((30px - 15px)/2 + 5px));
+    transform: rotate(-20deg);
+  }
+
+  50% {
+    top: calc(-1*((30px - 15px)/2 + 5px));
+    transform: rotate(0deg)
+  }
+
+  100% {
+    top: 0px;
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes center_active {
+  50% {
+    transform: scale(0)
+  }
+
+  100% {
+    transform: scale(0)
+  }
+}
+
+@keyframes center_no_active {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.nav__menu.active {
+  left: 0;
+}
+

@@ -7,4 +7,4 @@ from .views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index,name='name')
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]+ static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
