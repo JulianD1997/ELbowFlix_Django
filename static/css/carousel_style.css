@@ -1,0 +1,138 @@
+@import url(variables.css);
+
+/* Carousel style */
+.carousel {
+    overflow: hidden;
+    position: relative;
+    z-index: 5;
+    margin-top: 1rem;
+    width: min(95%, 1050px);
+    max-height: 50%;
+    background-color: transparent;
+    border-radius: 1.5rem;
+}
+
+.carousel__container {
+    position: relative;
+    z-index: -1;
+    width: calc((100% * 10));
+    height: 100%;
+    display: flex;
+    border: none;
+    margin-left: -100%;
+}
+
+.card {
+    flex: 1;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.card__img {
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    object-fit: cover;
+}
+
+.card__container {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    border-radius: 1rem;
+    top: 70%;
+    left: 5%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.card__title {
+    font-size: 1rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.card__overview {
+    display: none;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.play__button {
+    position: absolute;
+    z-index: 15;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+
+}
+
+.play__button::before {
+    content: '';
+    position: absolute;
+    z-index: 5;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--accent-light-color);
+    animation: pulse 1500ms ease-out infinite;
+}
+
+.play__button:hover {
+    width: 60px;
+    height: 60px;
+}
+
+.play__button span {
+    display: block;
+    position: relative;
+    z-index: 15;
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    border-left: 22px solid #fff;
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* end carousel */
+/* @media only screen and (min-width: 780px){
+    .carousel{
+        margin-top: 3rem;
+        padding: 1rem 5px;
+    }
+    .carousel__container{
+        gap: 2rem;
+        margin-left: calc(-100% - 2rem);
+    }
+    .card{
+        border-radius: 20px;
+    }
+    .card__overview {
+        display: block;
+    }
+} */

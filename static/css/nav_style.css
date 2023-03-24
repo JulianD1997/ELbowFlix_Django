@@ -1,0 +1,248 @@
+@import url(variables.css);
+/* Styles nav */
+.nav {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  display: flex;
+  padding: 0.5rem 1rem;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-color);
+}
+
+.nav__logo {
+  color: var(--text-color);
+  font-size: 2rem;
+  font-weight: bold;
+  text-decoration: none;
+  animation: slide 2s infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(10px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.nav__menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0 0 0;
+  width: 100%;
+  top: 100%;
+  left: 100%;
+  background-color: var(--nav_menu-color);
+  border-radius: 0 0 10px 10px;
+  transition: left 0.5s;
+}
+
+.nav__item {
+  margin-bottom: 1rem;
+}
+
+.nav__link {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.nav__link>span {
+  transition: text-decoration 0.3s ease-out;
+}
+
+.nav__link:hover {
+  color: var(--hover-text-color);
+  transform: scale(1.2);
+}
+
+.nav__link:hover>span {
+  text-decoration: underline;
+}
+
+.burger {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 40px;
+  height: 30px;
+}
+
+.bar {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 5px;
+  background-color: var(--text-color);
+  box-shadow: -2px -2px 5px var(--black-color);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.burger.active .bar:nth-child(1) {
+  animation: top_active ease .7s forwards;
+}
+
+.burger.no_active .bar:nth-child(1) {
+  animation: top_no_active ease .7s forwards;
+}
+
+.burger.active .bar:nth-child(2) {
+  animation: center_active ease .7s forwards;
+}
+
+.burger.no_active .bar:nth-child(2) {
+  animation: center_no_active .7s forwards;
+}
+
+.burger.active .bar:nth-child(3) {
+  animation: down_active ease .7s forwards;
+}
+
+.burger.no_active .bar:nth-child(3) {
+  animation: down_no_active ease .7s forwards;
+}
+
+@keyframes top_active {
+  0% {
+    top: 0;
+    transform: rotate(0);
+  }
+
+  50% {
+    top: calc((30px - 15px)/2 + 5px);
+    transform: rotate(0);
+  }
+
+  100% {
+    top: calc((30px - 15px)/2 + 5px);
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes top_no_active {
+  0% {
+    top: calc((30px - 15px)/2 + 5px);
+    transform: rotate(20deg);
+  }
+
+  50% {
+    top: calc((30px - 15px)/2 + 5px);
+    transform: rotate(0deg)
+  }
+
+  100% {
+    top: 0px;
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes down_active {
+  0% {
+    top: 0;
+    transform: rotate(0);
+  }
+
+  50% {
+    top: calc(-1*((30px - 15px)/2 + 5px));
+    transform: rotate(0);
+  }
+
+  100% {
+    top: calc(-1*((30px - 15px)/2 + 5px));
+    transform: rotate(-45deg);
+  }
+}
+
+@keyframes down_no_active {
+  0% {
+    top: calc(-1*((30px - 15px)/2 + 5px));
+    transform: rotate(-20deg);
+  }
+
+  50% {
+    top: calc(-1*((30px - 15px)/2 + 5px));
+    transform: rotate(0deg)
+  }
+
+  100% {
+    top: 0px;
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes center_active {
+  50% {
+    transform: scale(0)
+  }
+
+  100% {
+    transform: scale(0)
+  }
+}
+
+@keyframes center_no_active {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.nav__menu.active {
+  left: 0;
+}
+
+@media only screen and (min-width: 950px) {
+
+  /* Styles nav */
+  .nav__menu {
+    padding: 0 0.5rem;
+    position: relative;
+    top: 0;
+    left: 0;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.5rem;
+    background-color: transparent;
+  }
+  .nav__item{
+    margin: 0;
+  }
+  .nav__link {
+    color: var(--text-color);
+    cursor: pointer;
+    transition: color 0.3s ease-out;
+  }
+
+  .nav__link:hover {
+    color: var(--hover-text-color);
+  }
+
+  .burger {
+    display: none;
+  }
+}

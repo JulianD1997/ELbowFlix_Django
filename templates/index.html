@@ -1,5 +1,31 @@
-{% extends 'layouts/base.html' %}
-{% block 'title' %}Inicio{% endblock  %}
-{% block 'content' %}
+{% extends 'layouts/base.html' %} 
 
-{% endblock  %}
+{% block 'title' %}Inicio{% endblock %} 
+
+{% block 'styles' %} 
+
+{% load static%}
+    <link rel="stylesheet" href="{% static 'css/carousel_style.css' %}" />
+{% endblock %} 
+
+{% block 'content' %}
+<div class="carousel">
+    <div class="carousel__container">
+        {% for movie in movies %}
+        <div class="card">
+            <img class="card__img" src="{{ movie.background }}" alt="{{ movie.title }}"/>
+            <div class="card__container">
+                <h4 class="card__title">{{ movie.title }}</h4>
+                <span class="card__overview">{{ movie.overview }}</span>
+            </div>
+            <a id="play__button" class="play__button" href="#"><span></span></a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div id='overlay__video' class='overlay__video'>
+    <a class='close__video'>&times;</a>
+</div>
+{% endblock %} {% block 'scripts' %}
+<script src="{% static 'js/carousel.js' %}"></script>
+{% endblock %}
