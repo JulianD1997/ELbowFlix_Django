@@ -1,61 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
-
-/* global styles*/
-:root {
-  --primary-color: rgb(0, 70, 128);
-  --nav_menu-color: rgb(0, 115, 209);
-  --secondary-color: rgb(39, 45, 48);
-  --tertiary-color: rgb(128, 128, 128);
-  --accent-color: rgb(220, 0, 78);
-  --black-color: rgb(0, 0, 0);
-  --text-color: rgb(255, 255, 255);
-  --hover-text-color: rgb(205, 205, 205);
-  --font-title: 'Roboto', sans-serif;
-  --font-primary: 'Lato', sans-serif;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background-color: var(--secondary-color);
-  font-size: 1.5rem;
-  color: var(--text-color);
-  font-family: var(--font-primary);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: 2rem;
-  font-family: var(--font-title);
-}
-
-a {
-  text-decoration: none;
-}
-
-ul {
-  list-style-type: none;
-}
-
-/* end global style */
-
+@import url(variables.css);
 /* Styles nav */
 .nav {
   position: fixed;
-  padding: 0.5rem 1rem;
   z-index: 100;
   width: 100%;
   display: flex;
+  padding: 0.5rem 1rem;
   justify-content: space-between;
   align-items: center;
   background-color: var(--primary-color);
@@ -84,14 +34,15 @@ ul {
 }
 
 .nav__menu {
+  position: absolute;
   display: flex;
   flex-direction: column;
-  padding: 1rem 2rem;
-  position: absolute;
+  padding: 1rem 0 0 0;
   width: 100%;
   top: 100%;
   left: 100%;
   background-color: var(--nav_menu-color);
+  border-radius: 0 0 10px 10px;
   transition: left 0.5s;
 }
 
@@ -100,12 +51,14 @@ ul {
 }
 
 .nav__link {
+  font-size: 1.5rem;
   color: var(--text-color);
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 0.5rem;
   cursor: pointer;
-  transition: color 0.3s ease-out, trabsform 0.3s ease-out;
+  transition: color 0.3s ease-out, transform 0.3s ease-out;
 }
 
 .nav__link>span {
@@ -129,7 +82,6 @@ ul {
   cursor: pointer;
   width: 40px;
   height: 30px;
-  margin-right: 1rem;
 }
 
 .bar {
@@ -263,3 +215,34 @@ ul {
   left: 0;
 }
 
+@media only screen and (min-width: 950px) {
+
+  /* Styles nav */
+  .nav__menu {
+    padding: 0 0.5rem;
+    position: relative;
+    top: 0;
+    left: 0;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.5rem;
+    background-color: transparent;
+  }
+  .nav__item{
+    margin: 0;
+  }
+  .nav__link {
+    color: var(--text-color);
+    cursor: pointer;
+    transition: color 0.3s ease-out;
+  }
+
+  .nav__link:hover {
+    color: var(--hover-text-color);
+  }
+
+  .burger {
+    display: none;
+  }
+}
