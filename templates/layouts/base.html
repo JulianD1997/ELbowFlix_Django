@@ -11,21 +11,27 @@
     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    {% comment %} bloque de codigo para cargar hojas de estilo desde otro HTML {% endcomment %}
     {% block 'styles' %}{% endblock %}
 </head>
 <body class='body'>
+    {% comment %} barra de navegacion {% endcomment %}
     <header class='header'>
         {% include 'layouts/partials/nav.html' %}
     </header>
     <main class='main'>
+        {% comment %} contenido de la pagina {% endcomment %}
         {% block 'content' %}
         {% endblock %}
     </main>
     <footer>
+        {% comment %} informacion de la pagina {% endcomment %}
         {% include 'layouts/partials/footer.html' %}
     </footer>
 </body>
+{% comment %} Cargar scripts {% endcomment %}
 <script src="{% static 'js/nav_bar.js' %}"></script>
+{% comment %} bloque para Cargar scripts desde otro HTML {% endcomment %}
 {% block 'scripts' %}
 {% endblock %}
 </html>

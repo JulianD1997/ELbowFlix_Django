@@ -1,7 +1,6 @@
 /* constants */
 const carousel = document.querySelector('.carousel__container')
 const cards = document.querySelectorAll('.card')
-const playButton = document.querySelectorAll('#play__button')
 
 /* variables */
 let sliderCardLast = cards[cards.length - 1]
@@ -18,7 +17,7 @@ function moveCards() {
         carousel.style.marginLeft = '-100%'
     },800)
 }
-s
+
 setInterval(moveCards,7000)
 
-/* playButton. */
+

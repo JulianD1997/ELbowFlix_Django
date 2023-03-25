@@ -52,6 +52,7 @@ ul {
   height: 95vh;
   padding: 54px 0 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 /* end global style */

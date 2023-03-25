@@ -1,0 +1,54 @@
+@import url(variables.css);
+
+.overlay__video {
+    display: none;
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(20, 20, 20,.8);
+    transition: opacity 500ms ease-in,display 500ms ease-in;
+    opacity: 0;
+}
+
+.overlay__video.open {
+    display: block;
+    z-index: 100;
+    opacity: 1;
+}
+
+.close__button {
+    cursor: pointer;
+    position: absolute;
+    z-index: 115;
+    top: 5%;
+    left: 90%;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.close__button:hover, .close__button:focus {
+    cursor: pointer;
+    color: var(--accent-color);
+}
+
+.video {
+    position: absolute;
+    z-index: 110;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 15px var(--black-color);
+    width: min(80%,900px);
+    height: min(50%,700px);
+    border-radius: 20px;
+    background: rgb(20, 20, 20);
+    box-shadow:  
+        8px 8px 19px #0a0a0a,
+        -8px -8px 19px #1e1e1e;
+}
