@@ -4,13 +4,15 @@
 
 {% block 'styles' %} 
     {% load static%}
-    <link rel="stylesheet" href="{% static 'css/carousel_style.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/trailer_style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index/carousel_style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index/trailer_style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index/trending_style.css' %}" />
 {% endblock %}  
 
 {% block 'content' %}
     {% include 'layouts/partials/carousel.html' %}
     {% include 'layouts/partials/trailer.html' %}
+    {% include 'layouts/partials/trending.html'%}
 {% endblock %} 
 {% block 'scripts' %}
     <script src="{% static 'js/carousel.js' %}"></script>

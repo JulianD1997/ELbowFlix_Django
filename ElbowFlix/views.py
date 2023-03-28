@@ -1,46 +1,90 @@
 import json
+
 import requests
 from decouple import config
-from django.shortcuts import redirect, render
-from models.movies import Movie
 from django.http import JsonResponse
+from django.shortcuts import redirect, render
+
+from models.movies import Movie
 
 
+def get_trailer(movie_request):
+    """
+    Busca el tráiler de la película en la respuesta de la API de TMDB.
+    Retorna un diccionario con la clave 'key' y el valor del ID del video, y
+    la clave 'name' y el valor del nombre del video.
+    """
+    for result in movie_request.json()["results"]:
+        if result.get("type") == "Trailer":
+            return {"key": result.get('key'), "name": result.get("name")}
+        
+    return {}
 
-def tmdb_api(quest: str = 'discover', order: str = 'movie', params: dict = {}):
-    STATIC_URL = f'https://api.themoviedb.org/3/{quest}/{order}'
-    API_KEY = config('API_KEY')
-    params['api_key'] = API_KEY
-    params['language'] = 'es-MX'
-    request = requests.get(STATIC_URL, params=params)
+
+def tmdb_api(resource: str = "discover", type_: str = "movie", params: dict = {}):
+    """
+    Realiza una llamada a la API de TMDB y retorna la respuesta.
+    Si la llamada falla, retorna un diccionario vacío.
+    """
+    STATIC_URL = f"https://api.themoviedb.org/3/{resource}/{type_}"
+    API_KEY = config("API_KEY")
+    params["api_key"] = API_KEY
+    params.setdefault("language", "es-MX")
     
-    return requests.get(STATIC_URL, params=params)
-
-
-def movies_json(request):
-    try:
-        movies_request = tmdb_api(params={'sort_by': 'popularity.desc','language' : 'es-MX'})
-        movies = [Movie(movie).to_dict()
-                        for movie in movies_request.json()['results']]
-    except:
-        movies = {'Error': 'Not found'}
+    response = requests.get(STATIC_URL, params=params)
+    response.raise_for_status()
     
-    return JsonResponse(movies[:10],safe=False)
+    return response
 
-def index(request):
-    movies= movies_json(request).content.decode("ANSI")
-    context = {'movies': json.loads(movies)}
-    return render(request, 'index.html', context)
 
 
 def get_video(request, id):
-    quest = f'movie/{id}'
-    order = 'videos'
-    try:
-        movie_request = tmdb_api(quest=quest,order=order)
-        movie_trailer = {'key':movie_request.json()['results'][0]['key'],
-                         'name':movie_request.json()['results'][0]['name']}
-    except:
-        movie_trailer = {'Error': 'Not found'}
+    """
+    Obtiene el tráiler de una película a partir de su ID.
+    Retorna un objeto JSON con el ID y nombre del tráiler.
+    Si no se encuentra un tráiler, retorna un objeto JSON vacío.
+    """
+    resource = f"movie/{id}"
+    type_ = "videos"
+    languages = ["es-MX", "es-ES", "en-US"]
+    
+    for language in languages:
+        try:
+            movie_request = tmdb_api(resource=resource, type_=type_, params={"language": language})
+            movie_trailer = get_trailer(movie_request)
+            if movie_trailer:
+                return JsonResponse(movie_trailer)
+        except requests.exceptions.HTTPError as e:
+            pass
+    
+    # Si no se encontró un tráiler, devuelve un objeto JSON vacío
+    return JsonResponse({'Error':'no found'})
 
-    return JsonResponse(movie_trailer)
+
+def index(request):
+    """
+    Renderiza la página principal con una lista de películas.
+    """
+    movies = movies_json(request).content.decode("utf-8")
+    context = {"movies": json.loads(movies)}
+
+    return render(request, "index.html", context)
+
+
+def movies_json(request):
+    """
+    Obtiene una lista de las 10 películas más populares de TMDB.
+    Retorna un objeto JSON con información de cada película.
+    Si no se puede obtener la lista, retorna un objeto JSON vacío.
+    """
+    try:
+        movies_request = tmdb_api(
+            params={"sort_by": "popularity.desc", "language": "es-MX"}
+        )
+        movies = [
+            Movie(movie).to_dict() for movie in movies_request.json().get("results", [])[:10]
+        ]
+    except:
+        movies = {"Error": "No found"}
+
+    return JsonResponse(movies, safe=False)

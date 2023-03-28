@@ -1,4 +1,4 @@
-@import url(variables.css);
+@import url(../variables.css);
 
 .overlay__video {
     display: none;
