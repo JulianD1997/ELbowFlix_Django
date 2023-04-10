@@ -1,9 +1,12 @@
-<section class='trending'>
-    <div class='trending__head'>
-        <h3 class='trending__title'>Tendencias</h3>
-        <div class="trending__options">
-            <div class="trending__option today"><span>Hoy</span></div>
-            <div class="trending__option week active"><span>Semana</span></div>
-        </div>
+{% extends 'layouts/carousel_base.html' %}
+{% block 'class' %}trending{% endblock  %}
+{% block 'header-section' %}
+    <div class='section__head'>
+        <h3 class='title'>Tendencias</h3>
+        <button class="trending__switch">
+            <span class='switch hoy'>Hoy</span>
+            <span class='switch semana'>Semana</span>
+        </button>
     </div>
-</section>
+{% endblock %}
+{% block 'class-carousel' %}carousel__trending{%endblock %}

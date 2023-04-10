@@ -1,11 +1,11 @@
 class Movie:
     def __init__(self,args):
-        self._background = 'https://image.tmdb.org/t/p/original'+args['backdrop_path']
+        self._background = 'https://image.tmdb.org/t/p/original'+ args['backdrop_path'] if bool(args['backdrop_path']) else 'kqjL17yufvn9OVLyXYpvtyrFfak.jpg'
         self._id = args['id']
-        self._poster = 'https://image.tmdb.org/t/p/original'+args['poster_path']
-        self._overview = args['overview']
-        self._title = args['title']
-        self._vote = args['vote_average']
+        self._poster = 'https://image.tmdb.org/t/p/original'+ args['poster_path'] if bool(args['poster_path']) else 'kqjL17yufvn9OVLyXYpvtyrFfak.jpg'
+        self._overview = args['overview'] if bool(args['overview']) else ''
+        self._title = args['title'] if bool(args['title']) else ''
+        self._vote = args['vote_average'] if bool(args['vote_average']) else 0
     
     @property
     def background(self):

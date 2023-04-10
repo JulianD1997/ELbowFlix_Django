@@ -17,7 +17,7 @@ def get_trailer(movie_request):
     for result in movie_request.json()["results"]:
         if result.get("type") == "Trailer":
             return {"key": result.get('key'), "name": result.get("name")}
-        
+
     return {}
 
 
@@ -30,12 +30,11 @@ def tmdb_api(resource: str = "discover", type_: str = "movie", params: dict = {}
     API_KEY = config("API_KEY")
     params["api_key"] = API_KEY
     params.setdefault("language", "es-MX")
-    
+    params = dict(sorted(params.items(), key=lambda x: x[1]))
     response = requests.get(STATIC_URL, params=params)
     response.raise_for_status()
-    
+    #print(response.url)
     return response
-
 
 
 def get_video(request, id):
@@ -47,18 +46,19 @@ def get_video(request, id):
     resource = f"movie/{id}"
     type_ = "videos"
     languages = ["es-MX", "es-ES", "en-US"]
-    
+
     for language in languages:
         try:
-            movie_request = tmdb_api(resource=resource, type_=type_, params={"language": language})
+            movie_request = tmdb_api(resource=resource, type_=type_, params={
+                                     "language": language})
             movie_trailer = get_trailer(movie_request)
             if movie_trailer:
                 return JsonResponse(movie_trailer)
         except requests.exceptions.HTTPError as e:
             pass
-    
+
     # Si no se encontró un tráiler, devuelve un objeto JSON vacío
-    return JsonResponse({'Error':'no found'})
+    return JsonResponse({'Error': 'no found'})
 
 
 def index(request):
@@ -77,14 +77,34 @@ def movies_json(request):
     Retorna un objeto JSON con información de cada película.
     Si no se puede obtener la lista, retorna un objeto JSON vacío.
     """
+    params = {}
     try:
+        if not len(request.GET):
+            params["sort_by"] = "popularity.desc"
+            movies_request = tmdb_api(
+                params=params
+            )
+            movies = [
+                Movie(movie).to_dict() for movie in movies_request.json()['results'][:10]
+            ]
+            return JsonResponse(movies, safe=False)
+        
+        resource = request.GET.get('resource')
+        type_ = request.GET.get('type_')
+        
+        if type_ == 'upcoming':
+            params['region'] = request.GET.get('region')
+            params['language'] = 'es-ES'
+            
         movies_request = tmdb_api(
-            params={"sort_by": "popularity.desc", "language": "es-MX"}
+            resource=resource,
+            type_=type_,
+            params=params
         )
         movies = [
-            Movie(movie).to_dict() for movie in movies_request.json().get("results", [])[:10]
+            Movie(movie).to_dict() for movie in movies_request.json()['results']
         ]
-    except:
+    except Exception as e:
+        print(e)
         movies = {"Error": "No found"}
-
     return JsonResponse(movies, safe=False)
