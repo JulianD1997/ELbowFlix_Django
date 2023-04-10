@@ -24,7 +24,7 @@
     z-index: 10;
     border-radius: 50%;
     transition: all 800ms ease-in;
-    animation: scaleText 500ms infinite;
+    animation: scaleText 600ms infinite;
 }
 
 .move__button.left {
@@ -107,12 +107,6 @@
     font-weight: 700;
 }
 
-.card__overview {
-    display: none;
-    font-size: 1rem;
-    text-align: center;
-}
-
 .play__button {
     cursor: pointer;
     position: absolute;
@@ -167,7 +161,7 @@
     }
 
     .move__button:is(:hover, :active) {
-        animation: press_button 500ms ease-in-out forwards;
+        animation: press_button 800ms ease-in-out forwards;
     }
 }
 
@@ -227,10 +221,6 @@
 
     .card__title {
         font-size: 1.5rem;
-    }
-
-    .card__overview {
-        display: block;
     }
 
 }

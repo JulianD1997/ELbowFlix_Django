@@ -6,15 +6,19 @@
     {% load static%}
     <link rel="stylesheet" href="{% static 'css/index/carousel_style.css' %}" />
     <link rel="stylesheet" href="{% static 'css/index/trailer_style.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/index/trending_style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index/index_style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index/carouselView_style.css' %}" />
 {% endblock %}  
 
 {% block 'content' %}
     {% include 'layouts/partials/carousel.html' %}
     {% include 'layouts/partials/trailer.html' %}
     {% include 'layouts/partials/trending.html'%}
+    {% include 'layouts/partials/upcoming.html' %}
 {% endblock %} 
 {% block 'scripts' %}
-    <script src="{% static 'js/carousel.js' %}"></script>
+    <script src="{% static 'js/index/carousel.js' %}"></script>
+    <script src="{% static 'js/index/index.js' %}"></script>
     <script src="{% static 'js/play_trailer.js' %}"></script>
+    <script src="{% static 'js/index/buttons.js' %}"></script>
 {% endblock %}
