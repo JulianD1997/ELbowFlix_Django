@@ -1,0 +1,17 @@
+{% extends 'layouts/base.html' %}
+
+{% block 'title' %}Registro{% endblock %} 
+{% block 'styles' %} 
+    {% load static%}
+{% endblock %}
+{% block 'content' %}
+    <section class='register'>
+        <form action="POST">
+            {% csrf_token %}
+            {{form.as_div}}
+            <input type="submit" value='crear'>
+        </form>
+    </section>
+{% endblock %}
+{% block 'scripts' %}
+{% endblock %}

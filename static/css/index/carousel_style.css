@@ -3,7 +3,7 @@
 /* Carousel style */
 
 .discover {
-    margin-top: calc(1.5rem + 54px);
+    
     display: flex;
     flex-direction: column;
     align-items: center;
