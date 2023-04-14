@@ -1,0 +1,19 @@
+<section class="discover">
+    <div class="discover__container">
+        <a class="move__button left"><i class="fa-solid fa-chevron-left fa-2xl"></i></a>
+        <div class="carousel">
+            <div class="carousel__container">
+                {% for movie in movies %}
+                <div class="card">
+                    <img class="card__img" src="{{ movie.background }}" alt="{{ movie.title }}" />
+                    <div class="card__container">
+                        <h4 class="card__title">{{ movie.title }}</h4>
+                    </div>
+                    <a data-movie-id="{{movie.id}}" class="play__button"><span></span></a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <a class="move__button right"><i class="fa-solid fa-chevron-right fa-2xl"></i></a>
+    </div>
+</section>

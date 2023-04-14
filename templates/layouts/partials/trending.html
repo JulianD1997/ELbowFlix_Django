@@ -1,0 +1,12 @@
+{% extends 'layouts/carousel_base.html' %}
+{% block 'class' %}trending{% endblock  %}
+{% block 'header-section' %}
+    <div class='section__head'>
+        <h3 class='title'>Tendencias</h3>
+        <button class="trending__switch">
+            <span class='switch hoy'>Hoy</span>
+            <span class='switch semana'>Semana</span>
+        </button>
+    </div>
+{% endblock %}
+{% block 'class-carousel' %}carousel__trending{%endblock %}

@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+/* global styles*/
+:root {
+  --primary-color: rgb(0, 70, 128);
+  --nav_menu-color: rgb(0, 115, 209);
+  --secondary-color: rgb(39, 45, 48);
+  --tertiary-color: rgb(255, 191, 0);
+  --accent-color: rgb(186, 31, 36);
+  --accent-light-color: rgba(186, 31, 36, 0.9);
+  --black-color: rgb(0, 0, 0);
+  --text-color: rgb(255, 255, 255);
+  --hover-text-color: rgb(205, 205, 205);
+  --font-title: 'Roboto', sans-serif;
+  --font-primary: 'Lato', sans-serif;
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  position: static;
+  background-color: var(--secondary-color);
+  font-size: 0.8rem;
+  color: var(--text-color);
+  font-family: var(--font-primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 2rem;
+  font-family: var(--font-title);
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+}
+section:first-child{
+  margin-top: calc(1.5rem + 54px);
+}
+/* end global style */
