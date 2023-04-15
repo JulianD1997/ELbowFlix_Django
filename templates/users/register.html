@@ -8,6 +8,7 @@
     <section class='register'>
         <form action="POST">
             {% csrf_token %}
+            
             {{form.as_div}}
             <input type="submit" value='crear'>
         </form>
